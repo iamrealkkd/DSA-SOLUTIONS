@@ -20,5 +20,6 @@ public:
 
         }while(slow != fast);
         return slow == 1;
+        // return fast == 1;   // both are same in the end(Happy Ending Ho Gya)
     }
 };
