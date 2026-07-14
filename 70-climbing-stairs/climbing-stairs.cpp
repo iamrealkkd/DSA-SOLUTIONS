@@ -1,19 +1,30 @@
 class Solution {
 public:
-    int climbStairs(int n) {
-
-        vector<int> dp(n + 1);
+    
+    int solve(int n, vector<int>& dp) {
 
         // Base Cases
-        dp[0] = 1;
-        dp[1] = 1;
+        if (n == 0)
+            return 1;
 
-        // Transition
-        for (int i = 2; i <= n; i++) {
+        if (n == 1)
+            return 1;
 
-            dp[i] = dp[i - 1] + dp[i - 2];
-        }
+        // If already computed, return the stored answer.
+        if (dp[n] != -1)
+            return dp[n];
+
+        // Compute and store the answer.
+        dp[n] = solve(n - 1, dp) + solve(n - 2, dp);
 
         return dp[n];
+    }
+
+    int climbStairs(int n) {
+
+        // dp[i] stores the number of ways to reach stair i.
+        vector<int> dp(n + 1, -1);
+
+        return solve(n, dp);
     }
 };
