@@ -4,10 +4,7 @@ public:
     int solve(int n, vector<int>& dp) {
 
         // Base Cases
-        if (n == 0)
-            return 1;
-
-        if (n == 1)
+        if (n == 0 || n == 1)
             return 1;
 
         // If already computed, return the stored answer.
