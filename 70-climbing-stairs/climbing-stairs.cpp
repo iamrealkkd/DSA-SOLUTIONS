@@ -4,7 +4,7 @@ public:
     int climbStairs(int n) {
 
         // Step 1: Create DP table
-        vector<int> dp(n+1);
+        vector<int> dp(n+1, -1);
 
         // Step 2: Base Cases
         dp[0]=1;
