@@ -1,33 +1,23 @@
 class Solution {
 public:
-    int solve(int i, vector<int>& cost, vector<int>& dp) {
-
-        // Base case: top reached or crossed.
-        if (i >= cost.size()) {
-            return 0;
-        }
-
-        // Memoization check.
-        if (dp[i] != -1) {
-            return dp[i];
-        }
-
-        // Store the answer before returning.
-        dp[i] = cost[i] + min(
-            solve(i + 1, cost, dp),
-            solve(i + 2, cost, dp)
-        );
-
-        return dp[i];
-    }
-
     int minCostClimbingStairs(vector<int>& cost) {
 
-        vector<int> dp(cost.size(), -1);
+        int n = cost.size();
 
-        return min(
-            solve(0, cost, dp),
-            solve(1, cost, dp)
-        );
+        // DP array
+        // dp[i] = Minimum cost to reach the top starting from stair i
+        vector<int> dp(n + 2, 0);
+
+        // Fill DP table from back to front
+        for (int i = n - 1; i >= 0; i--) {
+
+            dp[i] = cost[i] + min(
+                dp[i + 1],
+                dp[i + 2]
+            );
+        }
+
+        // We can start from stair 0 or stair 1
+        return min(dp[0], dp[1]);
     }
 };
