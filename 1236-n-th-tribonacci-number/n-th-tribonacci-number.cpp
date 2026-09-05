@@ -1,18 +1,20 @@
 class Solution {
 public:
-    int solve(int n, vector<int> &t){
-        if (n == 0) return 0;
-        if (n == 1) return 1;
-        if (n == 2) return 1;
-
-        if(t[n] != -1)return t[n];
-
-        return t[n] = solve(n - 1, t)
-             + solve(n - 2, t)
-             + solve(n - 3, t);
-    }
     int tribonacci(int n) {
         vector<int> t(n + 1, -1);
-        return solve(n, t);
+        
+        if(n == 0) return 0;
+        if(n == 1) return 1;
+        if(n == 2) return 1;
+
+        t[0] = 0;
+        t[1] = 1;
+        t[2] = 1;
+
+        for(int i = 3; i <= n; i++){
+            t[i] = t[i - 1] + t[i - 2] + t[i - 3];
+        }
+
+        return t[n];
     }
 };
