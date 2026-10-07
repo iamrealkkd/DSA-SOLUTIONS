@@ -1,37 +1,34 @@
 class Solution {
 public:
-
-    int solve(int i, vector<int>& nums, vector<int>& dp){
-
-        if(i==0)
-            return nums[0];
-
-        if(dp[i]!=INT_MIN)
-            return dp[i];
-
-        return dp[i]=max(
-
-            nums[i],
-
-            nums[i]+solve(i-1,nums,dp)
-
-        );
-    }
-
     int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
 
-        int n=nums.size();
+        int nextRow_1 = 0;
+        int nextRow_0 = INT_MIN;
 
-        vector<int> dp(n,INT_MIN);
+        for(int i = n - 1; i >= 0; --i) {
+            int idealRow_1 = INT_MIN;
+            int idealRow_0 = INT_MIN;
 
-        int ans=INT_MIN;
+            for(int prevPick = 1; prevPick >= 0; --prevPick) {
+                if(prevPick) {
+                    int pickInSubarr = nextRow_1 + nums[i];
+                    int stopHere = 0;
 
-        for(int i=0;i<n;i++){
+                    idealRow_1 = max(pickInSubarr, stopHere);
+                }
+                else {
+                    int startNewFromCurr = nextRow_1 + nums[i];
+                    int startNewFromNext = nextRow_0;
 
-            ans=max(ans,solve(i,nums,dp));
+                    idealRow_0 = max(startNewFromCurr, startNewFromNext);
+                }
+            }
 
+            swap(nextRow_1, idealRow_1);
+            swap(nextRow_0, idealRow_0);
         }
 
-        return ans;
+        return nextRow_0;
     }
 };
