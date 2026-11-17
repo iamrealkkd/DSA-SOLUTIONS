@@ -7,7 +7,7 @@ public:
 
             if(freq == 0){
 
-                ans=nums[i];
+                ans = nums[i];
             }
 
             if(ans == nums[i]){
